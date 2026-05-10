@@ -29,9 +29,12 @@ jobs:
           file_name: .env
           fail_on_empty: false
 
+      - name: Copy .env to backend
+        run: cp .env backend/.env
+
       - name: Build Docker images
-        run: |
-          cd backend && docker compose build --force-rm --no-cache
+        working-directory: backend
+        run: docker compose build --force-rm --no-cache
 
   run:
     runs-on: self-hosted
@@ -45,7 +48,10 @@ jobs:
           clean: false
 
       - name: Run Docker images
+        working-directory: backend
         run: |
-          cd backend && docker compose stop
-          cd backend && docker compose up -d --force-recreate --remove-orphans
-          docker system prune --force
+          docker compose stop
+          docker compose up -d --force-recreate --remove-orphans
+
+      - name: Prune unused Docker resources
+        run: docker system prune --force
