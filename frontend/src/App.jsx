@@ -19,16 +19,11 @@ function MapPlaceholder() {
   return (
     <div style={{ height: "100%", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20, background: "#fafbfc" }}>
       <div style={{ position: "relative" }}>
-        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
           <line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/>
         </svg>
-        <div style={{
-          position: "absolute", top: -4, right: -4,
-          width: 18, height: 18, borderRadius: "50%",
-          background: "linear-gradient(135deg,#3b82f6,#6366f1)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
+        <div style={{ position: "absolute", top: -4, right: -4, width: 18, height: 18, borderRadius: "50%", background: "linear-gradient(135deg,#3b82f6,#6366f1)", display: "flex", alignItems: "center", justifyContent: "center" }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#fff" }} />
         </div>
       </div>
@@ -44,7 +39,7 @@ function AppInner() {
   const [result, setResult] = useState(null);
 
   return (
-    <div style={{ height: "100vh", display: "flex", flexDirection: "column", background: "#060d1a" }}>
+    <div className="app-root">
 
       {/* Header */}
       <header style={{
@@ -54,7 +49,7 @@ function AppInner() {
         position: "relative",
         zIndex: 10,
       }}>
-        <div style={{ maxWidth: 1800, margin: "0 auto", padding: "13px 24px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div style={{ maxWidth: 1800, margin: "0 auto", padding: "13px 20px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, color: "#fff" }}>
             <div style={{
               width: 36, height: 36, borderRadius: 10, flexShrink: 0,
@@ -66,11 +61,11 @@ function AppInner() {
             </div>
             <div>
               <div style={{ fontWeight: 700, fontSize: 15, letterSpacing: "-0.01em" }}>ELD Trip Planner</div>
-              <div style={{ color: "rgba(255,255,255,0.28)", fontSize: 11, marginTop: 1 }}>FMCSA-compliant hours of service</div>
+              <div className="header-sub">FMCSA-compliant hours of service</div>
             </div>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <div className="header-badges">
             {["70 hr / 8-day cycle", "Property carrier"].map(label => (
               <span key={label} style={{
                 fontSize: 11, fontWeight: 500,
@@ -87,20 +82,11 @@ function AppInner() {
       </header>
 
       {/* Split body */}
-      <div style={{ flex: 1, display: "flex", overflow: "hidden" }}>
+      <div className="app-body">
 
-        {/* ─── Dark sidebar ─── */}
-        <div style={{
-          width: 390,
-          flexShrink: 0,
-          background: "#0c1628",
-          borderRight: "1px solid rgba(255,255,255,0.07)",
-          overflowY: "auto",
-          display: "flex",
-          flexDirection: "column",
-        }}>
+        {/* Dark sidebar */}
+        <div className="app-sidebar">
           <TripForm onResult={setResult} />
-
           {result && (
             <div style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }} className="fade-in">
               <StopList
@@ -112,19 +98,17 @@ function AppInner() {
           )}
         </div>
 
-        {/* ─── Light content area ─── */}
-        <div style={{ flex: 1, overflowY: "auto", background: "#f0f4f8" }}>
-          <div style={{ padding: 24, display: "flex", flexDirection: "column", gap: 20, minHeight: "100%" }}>
+        {/* Light content area */}
+        <div className="app-content">
+          <div className="app-content-pad">
 
             {/* Map */}
-            <div style={{
+            <div className="map-card" style={{
               background: "#fff",
               borderRadius: 16,
               boxShadow: "0 1px 3px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.06)",
               border: "1px solid rgba(226,232,240,0.8)",
               overflow: "hidden",
-              height: 420,
-              flexShrink: 0,
             }}>
               {result
                 ? <MapView polyline={result.route.polyline} stops={result.stops} />

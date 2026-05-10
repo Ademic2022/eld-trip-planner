@@ -9,7 +9,44 @@ body {
 }
 
 .leaflet-container { z-index: 0; }
-.eld-scroll { overflow-x: auto; }
+.eld-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* ── Responsive split layout ── */
+.app-root  { height: 100vh; display: flex; flex-direction: column; background: #060d1a; }
+.app-body  { flex: 1; display: flex; overflow: hidden; }
+
+.app-sidebar {
+  width: 390px; flex-shrink: 0;
+  background: #0c1628;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  overflow-y: auto; display: flex; flex-direction: column;
+}
+.app-content { flex: 1; min-width: 0; overflow-y: auto; background: #f0f4f8; }
+.app-content-pad { padding: 24px; display: flex; flex-direction: column; gap: 20px; min-height: 100%; }
+.map-card   { height: 420px; flex-shrink: 0; }
+
+.header-badges { display: flex; align-items: center; gap: 8px; }
+.header-sub    { color: rgba(255,255,255,0.28); font-size: 11px; margin-top: 1px; }
+
+@media (max-width: 1024px) {
+  .app-root  { height: auto; min-height: 100svh; }
+  .app-body  { flex-direction: column; overflow: visible; flex: none; }
+  .app-sidebar {
+    width: 100%; border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    overflow-y: visible;
+  }
+  .app-content     { overflow-y: visible; }
+  .app-content-pad { padding: 16px; gap: 16px; min-height: 0; }
+  .map-card        { height: 300px; }
+}
+
+@media (max-width: 480px) {
+  .app-content-pad { padding: 12px; gap: 12px; }
+  .map-card        { height: 240px; }
+  .header-badges   { display: none; }
+  .header-sub      { display: none; }
+}
 
 @keyframes spin { to { transform: rotate(360deg); } }
 .spinner { animation: spin 0.8s linear infinite; }

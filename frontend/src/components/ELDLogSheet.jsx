@@ -479,7 +479,7 @@ export default function ELDLogSheet({ eldLogs }) {
             <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#94a3b8", marginBottom: 10 }}>
               Duty Status Changes
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))", gap: "2px 32px" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(300px, 100%), 1fr))", gap: "2px 32px" }}>
               {items.map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 8, padding: "5px 0", borderBottom: "1px solid #f8fafc" }}>
                   <span style={{ fontSize: 11, color: "#94a3b8", fontVariantNumeric: "tabular-nums", minWidth: 58, whiteSpace: "nowrap" }}>
