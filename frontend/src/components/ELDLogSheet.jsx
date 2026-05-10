@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 
 // Canvas layout constants (logical pixels — retina scaling applied separately)
 const W = 1100;
-const H = 680;
 const MARGIN_L = 16;
 const MARGIN_R = 16;
 const HEADER_H = 110;
@@ -16,6 +15,7 @@ const GRID_H = ROW_H * 4;
 const REMARKS_TOP = GRID_TOP + GRID_H + 8;
 const REMARKS_H = 120;
 const FOOTER_TOP = REMARKS_TOP + REMARKS_H + 8;
+const H = FOOTER_TOP + 28;   // derived — footer line + text + bottom margin, no blank space
 
 const STATUSES = ["OFF_DUTY", "SLEEPER_BERTH", "DRIVING", "ON_DUTY_NOT_DRIVING"];
 const ROW_LABELS = ["1. Off Duty", "2. Sleeper Berth", "3. Driving", "4. On Duty\n(not driving)"];
