@@ -1,0 +1,51 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+    runs-on: self-hosted
+    # needs: test
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          clean: false
+
+      - name: Generate .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_DEBUG: ${{ secrets.DEBUG }}
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          envkey_ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
+          envkey_CORS_ALLOWED_ORIGINS: ${{ secrets.CORS_ALLOWED_ORIGINS }}
+          envkey_ORS_API_KEY: ${{ secrets.ORS_API_KEY }}
+
+         
+          file_name: .env
+          fail_on_empty: false
+
+      - name: Build Docker images
+        run: |
+          docker compose build --force-rm --no-cache
+
+  run:
+    runs-on: self-hosted
+
+    needs:
+      - build
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          clean: false
+
+      - name: Run Docker images
+        run: |
+          docker compose stop
+          docker compose up -d --force-recreate --remove-orphans
+          docker system prune --force
