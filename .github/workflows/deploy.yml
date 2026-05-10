@@ -31,7 +31,7 @@ jobs:
 
       - name: Build Docker images
         run: |
-          docker compose build --force-rm --no-cache
+          cd backend && docker compose build --force-rm --no-cache
 
   run:
     runs-on: self-hosted
@@ -46,6 +46,6 @@ jobs:
 
       - name: Run Docker images
         run: |
-          docker compose stop
-          docker compose up -d --force-recreate --remove-orphans
+          cd backend && docker compose stop
+          cd backend && docker compose up -d --force-recreate --remove-orphans
           docker system prune --force
