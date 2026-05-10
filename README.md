@@ -3,8 +3,6 @@
 A full-stack FMCSA-compliant Electronic Logging Device (ELD) trip planner. Enter an origin, pickup, and dropoff location along with your current cycle hours, and the app generates an HOS-compliant route with annotated stops and daily log sheets.
 
 **Live demo:** https://eld-trip-planner-ashy.vercel.app  
-**Backend API:** https://eld-planner.duckdns.org/graphql/
-
 ---
 
 ## Features
