@@ -335,11 +335,6 @@ function drawFooter(ctx, log) {
   ctx.font = "9px sans-serif";
   ctx.textAlign = "left";
   ctx.textBaseline = "top";
-  ctx.fillText(
-    "Driver certifies that the information herein is true and correct. " +
-    "Use time standard of home terminal.",
-    MARGIN_L, y + 4
-  );
 }
 
 function drawLog(ctx, log) {
